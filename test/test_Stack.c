@@ -7,16 +7,16 @@ void setUp(void){}
 void tearDown(void){}
 /**
  *  createStack like this
- *  
- *  ********          
+ *
+ *  ********
  *  * head *-------->NULL
- *  ********  
+ *  ********
  *  * tail *-------->NULL
  *  ********
  */
 void test_createStack(void){
 	Stack* testStack = createStack();
-  
+
   TEST_ASSERT_NOT_NULL(testStack);
   TEST_ASSERT_NULL(testStack->head);
   TEST_ASSERT_NULL(testStack->tail);
@@ -25,14 +25,14 @@ void test_createStack(void){
 
 /**
  *  createStackElement like this
- *  
- *  *************          
+ *
+ *  *************
  *  * data = 10 *-------->NULL
  *  *************
  */
 void test_createStackElement(void){
   StackElement* testElement = createStackElement(10);
-  
+
   TEST_ASSERT_NOT_NULL(testElement);
   TEST_ASSERT_EQUAL(10, testElement->data);
   TEST_ASSERT_NULL(testElement->next);
@@ -41,17 +41,17 @@ void test_createStackElement(void){
 /**
  *  Before:                 After stackAdd:
  *  ********                ********-------
- *  * head *----->NULL      * head *       \ 
+ *  * head *----->NULL      * head *       \
  *  ********                ********       *************
  *  * tail *----->NULL      * tail * ----->* data = 10 *--->NULL
  *  ********                ********       *************
- *  
+ *
  */
 void test_stackAdd_add_1_Element_in_front(void){
   Stack* testStack = createStack();
   StackElement* testElement = createStackElement(10);
   stackAdd(testStack,testElement);
-  
+
   TEST_ASSERT_NOT_NULL(testStack);
   TEST_ASSERT_NOT_NULL(testElement);
   TEST_ASSERT_EQUAL(10, testStack->head->data);
@@ -71,20 +71,20 @@ void test_stackAdd_NULL_Stack_add_1_Element_should_return_error(void){
   Stack* testStack = NULL;
   StackElement* testElement = createStackElement(10);
   stackAdd(testStack,testElement);
-  
+
   TEST_ASSERT_NULL(testStack);
 }
 
 /**
- *  If the Element add-in is NULL, stackAdd tell error and remain the stack unchanged.  
+ *  If the Element add-in is NULL, stackAdd tell error and remain the stack unchanged.
  *
- *  Before:                     After:
- *  
- *  ********                    ********           
- *  * head *-------->NULL       * head *-------->NULL
- *  ********                    ********
- *  * tail *-------->NULL       * tail *-------->NULL
- *  ********                    ********  
+ *  Before:                                       After:
+ *
+ *  ********---------                             ********-----------
+ *  * head *         \                            * head *           \
+ *  ********      *************                   ********      *************
+ *  * tail * ---> * data = 10 * -----> NULL       * tail * ---> * data = 10 * -----> NULL
+ *  ********      *************                   ********      *************
  */
 void test_stackAdd_add_NULL_Element_in_front(void){
   Stack* testStack = createStack();
@@ -92,7 +92,7 @@ void test_stackAdd_add_NULL_Element_in_front(void){
   StackElement* testElement_2 = NULL;
   stackAdd(testStack,testElement_1);
   stackAdd(testStack,testElement_2);
-  
+
   TEST_ASSERT_NOT_NULL(testStack);
   TEST_ASSERT_NULL(testElement_2);
   TEST_ASSERT_NOT_NULL(testElement_1);
@@ -105,17 +105,17 @@ void test_stackAdd_add_NULL_Element_in_front(void){
 /**
  *  Before:                 After 1st stackAdd:
  *  ********                ********-------
- *  * head *----->NULL      * head *       \ 
+ *  * head *----->NULL      * head *       \
  *  ********                ********       *************
  *  * tail *----->NULL      * tail * ----->* data = 10 *--->NULL
  *  ********                ********       *************
- *                                 
+ *
  *    After 2nd stackAdd
  *     ********--------------------------
  *     * tail *                          \
  *     ********       ************    *************
  *     * head * ----->* data = 5 *--->* data = 10 *----->NULL
- *     ********       ************    ************* 
+ *     ********       ************    *************
  */
 void test_stackAdd_add_2_Element_in_front(void){
   Stack* testStack = createStack();
@@ -123,7 +123,7 @@ void test_stackAdd_add_2_Element_in_front(void){
   StackElement* testElement_2 = createStackElement(5);
   stackAdd(testStack,testElement_1);
   stackAdd(testStack,testElement_2);
-  
+
   TEST_ASSERT_NOT_NULL(testStack);
   TEST_ASSERT_NOT_NULL(testElement_1);
   TEST_ASSERT_NOT_NULL(testElement_2);
@@ -137,17 +137,17 @@ void test_stackAdd_add_2_Element_in_front(void){
 /**
  *  Before:                 After 1st stackAdd:
  *  ********                ********-------
- *  * head *----->NULL      * head *       \ 
+ *  * head *----->NULL      * head *       \
  *  ********                ********       *************
  *  * tail *----->NULL      * tail * ----->* data = 10 *--->NULL
  *  ********                ********       *************
- *                                 
+ *
  *    After 3rd stackAdd
  *     ********-------------------------------------------
  *     * tail *                                           \
  *     ********       ************     ************    *************
  *     * head * ----->* data = 2 *---> * data = 5 *--->* data = 10 *----->NULL
- *     ********       ************     ************    ************* 
+ *     ********       ************     ************    *************
  */
 void test_stackAdd_add_3_Element_in_front(void){
   Stack* testStack = createStack();
@@ -155,9 +155,9 @@ void test_stackAdd_add_3_Element_in_front(void){
   StackElement* testElement_2 = createStackElement(5);
   StackElement* testElement_3 = createStackElement(2);
   stackAdd(testStack,testElement_1);
-  stackAdd(testStack,testElement_2);  
+  stackAdd(testStack,testElement_2);
   stackAdd(testStack,testElement_3);
-  
+
   TEST_ASSERT_NOT_NULL(testStack);
   TEST_ASSERT_NOT_NULL(testElement_1);
   TEST_ASSERT_NOT_NULL(testElement_2);
@@ -170,12 +170,12 @@ void test_stackAdd_add_3_Element_in_front(void){
   TEST_ASSERT_EQUAL(3,testStack->length);
 }
 /**
- *    Before 
+ *    Before
  *     ********-------------------------------------------
  *     * tail *                                           \
  *     ********       ************     ************    *************
  *     * head * ----->* data = 2 *---> * data = 5 *--->* data = 10 *----->NULL
- *     ********       ************     ************    ************* 
+ *     ********       ************     ************    *************
  *
  *
  *    After stackRemove
@@ -183,7 +183,7 @@ void test_stackAdd_add_3_Element_in_front(void){
  *     * tail *                          \
  *     ********       ************    *************
  *     * head * ----->* data = 5 *--->* data = 10 *----->NULL
- *     ********       ************    ************* 
+ *     ********       ************    *************
  *
  */
 void test_stackRemove_given_Stack_with_3_Element_should_return_stack_with_2_element(void){
@@ -193,11 +193,11 @@ void test_stackRemove_given_Stack_with_3_Element_should_return_stack_with_2_elem
   StackElement* testElement_2 = createStackElement(5);
   StackElement* testElement_3 = createStackElement(2);
   stackAdd(testStack,testElement_1);
-  stackAdd(testStack,testElement_2);  
+  stackAdd(testStack,testElement_2);
   stackAdd(testStack,testElement_3);
-  
+
   removedElement = stackRemove(testStack);
-  
+
   TEST_ASSERT_NOT_NULL(testStack);
   TEST_ASSERT_NOT_NULL(testElement_1);
   TEST_ASSERT_NOT_NULL(testElement_2);
@@ -214,39 +214,39 @@ void test_stackRemove_given_Stack_with_3_Element_should_return_stack_with_2_elem
 
 /**
  *  if Stack is NULL while calling stackRemove
- *  
+ *
  *  tell error
  *  ERROR: Stack cannot be NULL
- *  Then, jump out directly!
+ *  Then, return NULL!
  */
 void test_stackRemove_NULL_Stack_remove_Element_should_return_error(void){
   Stack* testStack = NULL;
   StackElement* removedElement = malloc(sizeof(StackElement));
   removedElement = stackRemove(testStack);
-  
+
   TEST_ASSERT_NULL(testStack);
 }
 
 /**
- *  If the Stack is empty, stackRemove tell error and return a NULL  
+ *  If the Stack is empty, stackRemove tell error and return a NULL
  *
- *  Before:                     After:             
- *    
- *  ********                    ********                  
+ *  Before:                     After:
+ *
+ *  ********                    ********
  *  * head *-------->NULL       * head *-------->NULL
  *  ********                    ********
  *  * tail *-------->NULL       * tail *-------->NULL
- *  ********                    ********  
+ *  ********                    ********
  *
  *                              Return NULL
  */
 void test_stackRemove_given_NULL_Stack_should_return_Empty_element(void){
   Stack* testStack = createStack();
   StackElement* removedElement = malloc(sizeof(StackElement));
-  
+
   removedElement = stackRemove(testStack);
-  
-  TEST_ASSERT_NOT_NULL(testStack);  
+
+  TEST_ASSERT_NOT_NULL(testStack);
   TEST_ASSERT_NULL(removedElement);
   TEST_ASSERT_EQUAL(0,testStack->length);
 }
