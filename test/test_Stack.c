@@ -211,6 +211,22 @@ void test_stackRemove_given_Stack_with_3_Element_should_return_stack_with_2_elem
   TEST_ASSERT_EQUAL(2,testStack->length);
 }
 
+void test_stackRemove_given_Stack_with_1_Element_should_return_empty_stack(void){
+  Stack* testStack = createStack();
+  StackElement* removedElement = malloc(sizeof(StackElement));
+  StackElement* testElement_1 = createStackElement(10);
+  stackAdd(testStack,testElement_1);
+
+  removedElement = stackRemove(testStack);
+
+  TEST_ASSERT_NOT_NULL(testStack);
+  TEST_ASSERT_NOT_NULL(testElement_1);
+  TEST_ASSERT_NOT_NULL(removedElement);
+  TEST_ASSERT_NULL(testStack->head);
+  TEST_ASSERT_NULL(testStack->tail);
+  TEST_ASSERT_EQUAL(10,removedElement->data);
+  TEST_ASSERT_EQUAL(0,testStack->length);
+}
 
 /**
  *  if Stack is NULL while calling stackRemove

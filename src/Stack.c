@@ -64,8 +64,12 @@ StackElement* stackRemove(Stack* stack){
   else{
     removedElement = malloc(sizeof(StackElement));
     removedElement = stack->head;
-    stack->head = stack->head->next;
-  
+    if(stack->head->next != NULL)
+      stack->head = stack->head->next;
+    else{
+      stack->head = NULL;
+      stack->tail = NULL;
+    } 
     removedElement->next = NULL;
     stack->length --;
   }
