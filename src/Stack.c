@@ -33,7 +33,7 @@ void stackAdd(Stack* stack, StackElement *elem){
     printf("ERROR: STACK cannot be NULL!");
   }
   else{
-    StackElement* prevHead = malloc(sizeof(StackElement));
+    StackElement* prevHead;
     prevHead = stack->head;
     stack->head = elem; //No matter what, the head always point to the new added Element
     
@@ -52,7 +52,6 @@ void stackAdd(Stack* stack, StackElement *elem){
 StackElement* stackRemove(Stack* stack){
   StackElement* removedElement;
 
-
   if(stack == NULL){    
     removedElement = NULL;
     printf("ERROR: STACK cannot be NULL!");
@@ -62,7 +61,6 @@ StackElement* stackRemove(Stack* stack){
     printf("Nothing to remove, empty stack here! Return empty element");
   }
   else{
-    removedElement = malloc(sizeof(StackElement));
     removedElement = stack->head;
     if(stack->head->next != NULL)
       stack->head = stack->head->next;
